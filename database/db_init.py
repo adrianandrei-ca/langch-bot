@@ -39,25 +39,22 @@ def load_products(connection, logger):
     connection.commit()
 
 def _init_db(db_file, logger):
-    isExist = os.path.exists(db_file)
-    if not isExist:
-        sql_script = None
-        with open('database/schema.sql', 'r') as sql_file:
-            sql_script = sql_file.read()
-        logger.info("opening database {}".format(db_file))
-        connection = sqlite3.connect(db_file, detect_types=sqlite3.PARSE_DECLTYPES | sqlite3.PARSE_COLNAMES)
-        connection.executescript(sql_script)
-        connection.commit()
+    sql_script = None
+    with open('database/schema.sql', 'r') as sql_file:
+        sql_script = sql_file.read()
+    logger.info("Creating database {}".format(db_file))
+    connection = sqlite3.connect(db_file, detect_types=sqlite3.PARSE_DECLTYPES | sqlite3.PARSE_COLNAMES)
+    connection.executescript(sql_script)
+    connection.commit()
 
-        load_orders(connection, logger)
-        load_products(connection, logger)
+    load_orders(connection, logger)
+    load_products(connection, logger)
 
-        connection.close()
-        logger.info("New database created")
+    connection.close()
+    logger.info("New database created")
 
 def get_sql_db_connection(logger):
     db_file = os.path.join(DB_PATH, DB_SQLITE_FILE)
-    _init_db(db_file, logger)
 
     connection = sqlite3.connect(db_file, detect_types=sqlite3.PARSE_DECLTYPES | sqlite3.PARSE_COLNAMES)
     connection.row_factory = sqlite3.Row
