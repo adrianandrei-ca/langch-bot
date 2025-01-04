@@ -1,0 +1,8 @@
+sqlite3
+langchain
+langchain-openai
+langchain-core
+langchain_text_splitters
+numpy
+langchain_community
+sqlite-vec

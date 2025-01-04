@@ -1,0 +1,11 @@
+__pycache__
+
+.DS_Store
+
+static/
+
+*.tar
+
+*.pickle
+
+data/.~lock*
