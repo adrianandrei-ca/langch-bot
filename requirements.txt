@@ -1,5 +1,5 @@
-sqlite3
 langchain
+langgraph
 langchain-openai
 langchain-core
 langchain_text_splitters

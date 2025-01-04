@@ -19,6 +19,8 @@ from typing_extensions import List, TypedDict
 from typing_extensions import Annotated
 
 DB_PATH = os.getenv("DB_PATH", "static/database")
+os.makedirs(DB_PATH, exist_ok = True)
+
 DB_VEC_SQLITE_FILE = os.getenv("DB_SQLITE_FILE", "vec.db")
 DB_SQLITE_FILE = os.getenv("DB_SQLITE_FILE", "database.db")
 
