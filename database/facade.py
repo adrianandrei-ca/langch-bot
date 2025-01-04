@@ -28,7 +28,7 @@ class DB():
 
         connection = self.connection_getter(self.logger)
         cursor = connection.cursor()
-        prods = cursor.execute('SELECT * FROM products LIMIT 100').fetchall()
+        prods = cursor.execute('SELECT * FROM products').fetchall()
         for prod in prods:
             _documents.append(f"{prod['title']}. {self._data_as_text(prod['features'])}. {self._data_as_text(prod['product_description'])}. {self._data_as_text(prod['details'])}.")
             _metas.append({"id": prod["id"], "rating": prod["average_rating"]})
