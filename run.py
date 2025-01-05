@@ -1,5 +1,6 @@
 import logging
 import argparse
+import time
 
 from database import DB, get_sql_db_connection, init_db
 from chatbot import respond, init_vectore_store
@@ -20,11 +21,13 @@ logger = logging.getLogger(__name__)
 database = DB(get_sql_db_connection, logger)
 
 def test_input(user_input: str, thread_id: str = "test"):
-    logger.info(f"User>>> {user_input}")
+    logger.info(f"\nUser>>> {user_input}\n")
     answer = respond(user_input, thread_id)
-    logger.info(f"Bot>>> {answer}")
+    logger.info(f"\nBot>>> {answer}\n")
 
 def run_tests():
+    start_time = time.time()
+
     test_input("What’s a good product for thin guitar strings?")
     test_input("Is the BOYA BYM1 Microphone good for a cello?")
     test_input("What are the top 5 highly-rated guitar products?")
@@ -36,6 +39,12 @@ def run_tests():
     test_input("Can I play the piano at Disneys'?", "test2")
     test_input("Ok, fine. What's your best piano?", "test2")
 
+    end_time = time.time()
+
+    elapsed_time = end_time - start_time
+
+    logger.info(f"Elapsed time: {elapsed_time} seconds")
+
 def init_storage():
         init_db(logger)
         init_vectore_store(database)
@@ -43,11 +52,11 @@ def init_storage():
 def interactive_console():
     print("Type one of exit or quit word to stop.")
     while True:
-        question = input("Your question? ")
+        question = input("\nYour question? ")
         if question == "quit" or question == "exit":
             break
         answer = respond(question, "console")
-        print(f"Bot answer:\n{answer}")
+        print(f"\nBot answer:\n{answer}\n")
     logger.info("Exiting...")
 
 if __name__ == "__main__":
