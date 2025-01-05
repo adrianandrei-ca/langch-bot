@@ -11,22 +11,17 @@ The solution is stateful, in the sense that when an incomplete question is asked
 Example:
 <code>
 User>>> What are the details of my last order?
-
 Bot>>> Please provide your Customer ID to retrieve the details of your last order.
-
 User>>> My Customer ID is 77391.
-
 Bot>>> You have two orders associated with your Customer ID 77391: one placed on 2018-10-26 and another on 2018-09-28. Which order would you like to inquire about?
-
 User>>> The oldest one.
-
 Bot>>> Your order for one pair of Sneakers placed on 2018-09-28 at 14:29:32 has a shipping cost of $6.2 and the total sales amount was $62. Let me know if you'd like more details or need assistance with this order!
+
 </code>
 
 The solution identifies the data source based on context using Pydentic approach, so the question below is responded from the product table using RAG.
 <code>
 User>>> What are the top 5 highly-rated guitar products?
-
 Bot>>> The top 5 highly-rated guitar products based on the provided context are:
 
 1. WINGO Guitar Capo for Acoustic and Electric Guitars - Known for its quick release and versatile compatibility with various string instruments.
@@ -36,6 +31,7 @@ Bot>>> The top 5 highly-rated guitar products based on the provided context are:
 5. D'Addario XL Nickel Electric Guitar Strings in High-Strung/Nashville Tuning - Offers a unique shimmering tone suitable for various musical styles.
 
 Would you like more details on any of these products or suggestions for other options?
+
 </code>
 
 **Environment Variables Setup**
