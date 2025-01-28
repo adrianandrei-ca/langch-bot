@@ -46,7 +46,13 @@ db = SQLDatabase.from_uri("sqlite:///" + os.path.join(DB_PATH, DB_SQLITE_FILE))
 
 def string_to_list_of_tuples(string):
     """Converts a string representation of a list of tuples to a list of tuples."""
-    return ast.literal_eval(string)
+    if not string:
+        return []
+    try:
+        return ast.literal_eval(string)
+    except:
+        logger.error(string)
+        return []
 
 def init_vectore_store(database):
     text_splitter = CharacterTextSplitter(
@@ -328,6 +334,7 @@ def generate_my_order_sql_answer(state: State):
         response = llm.invoke(prompt)
         return {"answer": response.content, "myOrderQuestions": my_order_questions}
     else:
+        logger.info(sql)
         sql_result = state["sqlResult"]
         rows = string_to_list_of_tuples(sql_result)
         if len(rows) == 0:
